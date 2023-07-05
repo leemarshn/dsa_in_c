@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(dsa_in_c main.c)
 add_executable(dsa_in_c2 List_Implementation.c)
+add_executable(dsa_in_c3 SortedMatrix.c)
 
