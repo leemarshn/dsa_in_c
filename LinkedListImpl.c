@@ -10,7 +10,7 @@ struct Node {
     struct Node* next;
 };
 
-void list_insert(struct Node** head, int x, int i) {
+void list_insert(struct Node** head, int x) {
     // Create a new node
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     if (newNode == NULL) {
@@ -18,23 +18,17 @@ void list_insert(struct Node** head, int x, int i) {
         return;
     }
     newNode->data = x;
+    newNode->next = NULL;
 
-    if (i == 0) {
-        newNode->next = *head;
+    if (*head == NULL) {
         *head = newNode;
-        return;
-    }
-
-    struct Node* current = *head;
-    for (int count = 0; count < i - 1; count++) {
-        if (current == NULL) {
-            printf("Invalid position\n");
-            return;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
         }
-        current = current->next;
+        current->next = newNode;
     }
-    newNode->next = current->next;
-    current->next = newNode;
 }
 
 // Utility function to print the linked list
@@ -52,12 +46,13 @@ int main() {
     struct Node* head = NULL;
 
     // Insert elements into the linked list
-    list_insert(&head, 1, 0);
-    list_insert(&head, 23, 1);
-    list_insert(&head, 17, 2);
-    list_insert(&head, 4, 3);
-    list_insert(&head, -5, 4);
-    list_insert(&head, 100, 5);
+    list_insert(&head, 1);
+    list_insert(&head, 4);
+
+    list_insert(&head, 23);
+    list_insert(&head, 17);
+    list_insert(&head, -5);
+    list_insert(&head, 100);
 
     // Print the linked list
     printList(head);
